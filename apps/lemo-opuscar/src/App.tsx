@@ -38,10 +38,10 @@ export default function App() {
             </div>
             <div>
               <h1 className="text-base font-semibold tracking-tight">
-                Lemo-Opuscar studio
+                Lemo-Opuscar 工作室
               </h1>
               <p className="text-xs text-muted">
-                Code-native film styles · scout demo
+                纯代码电影风格 · 技侦 Demo
               </p>
             </div>
           </div>
@@ -52,7 +52,7 @@ export default function App() {
               target="_blank"
               rel="noreferrer"
             >
-              Upstream <ExternalLink className="size-3" />
+              上游仓库 <ExternalLink className="size-3" />
             </a>
             <a
               className="inline-flex items-center gap-1 text-muted hover:text-ink"
@@ -60,7 +60,7 @@ export default function App() {
               target="_blank"
               rel="noreferrer"
             >
-              Bookmark <ExternalLink className="size-3" />
+              原书签 <ExternalLink className="size-3" />
             </a>
           </div>
         </div>
@@ -77,11 +77,11 @@ export default function App() {
       </main>
 
       <footer className="border-t border-line px-4 py-6 text-center text-[11px] text-muted">
-        Inspired by{' '}
+        灵感来自{' '}
         <a className="underline" href="https://github.com/lemomo-ai/lemo-opuscar">
           lemomo-ai/lemo-opuscar
         </a>
-        . Client-only demo · no Claude API · no video model · {year}
+        。纯前端 Demo · 不调用 Claude API · 不使用视频模型 · {year}
       </footer>
     </div>
   )

@@ -19,21 +19,21 @@ await page.goto('http://127.0.0.1:5173/', { waitUntil: 'networkidle' })
 await page.waitForTimeout(1500)
 
 // Fill brief a bit for a richer screenshot
-await page.getByPlaceholder('e.g. A lighthouse that refuses to go dark').fill(
-  'A lighthouse that refuses to go dark',
+await page.getByPlaceholder('例如：一座拒绝熄灭的灯塔').fill(
+  '一座拒绝熄灭的灯塔',
 )
-await page.getByPlaceholder('Setup → turn → ending').fill(
-  'Keeper climbs; bulb dies; code draws a new sun.',
+await page.getByPlaceholder('铺垫 → 转折 → 结局').fill(
+  '守塔人登塔；灯泡熄灭；代码画出一轮新太阳。',
 )
 
 // Cycle a few styles so the video shows animation changes
 const names = [
   'ASCII / CRT',
-  'Hologram HUD',
-  '16-bit Pixel RPG',
-  'Rubber Hose',
-  'Low-poly Island',
-  '60s Spy Titles',
+  '全息 HUD',
+  '16 位像素 RPG',
+  '橡皮管动画',
+  '低多边形小岛',
+  '60 年代谍战片头',
 ]
 for (const name of names) {
   await page.getByRole('button', { name: new RegExp(name) }).click()
@@ -41,7 +41,7 @@ for (const name of names) {
 }
 
 // Land on hologram for the still
-await page.getByRole('button', { name: /Hologram HUD/ }).click()
+await page.getByRole('button', { name: /全息 HUD/ }).click()
 await page.waitForTimeout(1200)
 await page.screenshot({
   path: path.join(__dirname, 'ui-preview.png'),

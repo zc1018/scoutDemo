@@ -68,7 +68,7 @@ export function StylePreview({ style }: Props) {
       <canvas ref={canvasRef} className="block h-[280px] w-full sm:h-[340px]" />
       <div className="pointer-events-none absolute inset-x-0 top-0 flex items-start justify-between p-3">
         <div className="rounded-md bg-black/50 px-2 py-1 text-[11px] font-medium tracking-wide text-white backdrop-blur">
-          LIVE · {style.name}
+          实时 · {style.name}
         </div>
         <div className="pointer-events-auto">
           <Button
@@ -76,15 +76,15 @@ export function StylePreview({ style }: Props) {
             variant="outline"
             className="border-white/20 bg-black/40 text-white hover:bg-black/60"
             onClick={() => setPlaying((p) => !p)}
-            aria-label={playing ? 'Pause preview' : 'Play preview'}
+            aria-label={playing ? '暂停预览' : '播放预览'}
           >
             {playing ? <Pause className="size-3.5" /> : <Play className="size-3.5" />}
-            {playing ? 'Pause' : 'Play'}
+            {playing ? '暂停' : '播放'}
           </Button>
         </div>
       </div>
       <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent px-3 pb-3 pt-8 text-[11px] text-white/80">
-        Code-native Canvas preview · no video model
+        纯代码 Canvas 预览 · 不使用视频模型
       </div>
     </div>
   )
@@ -324,7 +324,7 @@ function drawPixelRpg(
   ctx.strokeRect(12, boxY, w - 24, 56)
   ctx.fillStyle = '#fff'
   ctx.font = '12px monospace'
-  const msg = 'A code-native film. No video model.'
+  const msg = '一部纯代码电影，不用视频模型。'
   const shown = Math.floor((t * 12) % (msg.length + 8))
   ctx.fillText(msg.slice(0, Math.min(shown, msg.length)), 24, boxY + 28)
   if (Math.floor(t * 3) % 2 === 0 && shown >= msg.length) {

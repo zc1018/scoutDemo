@@ -13,13 +13,13 @@ export function StyleGallery({ selectedId, onSelect }: Props) {
       <div className="flex items-end justify-between gap-2">
         <div>
           <h2 className="text-sm font-semibold tracking-wide uppercase text-muted">
-            Style gallery
+            风格图鉴
           </h2>
           <p className="text-xs text-muted/80">
-            Curated from Lemo-Opuscar · pick one to drive the preview
+            精选自 Lemo-Opuscar · 选一个驱动预览
           </p>
         </div>
-        <span className="text-[11px] text-muted">{STYLES.length} styles</span>
+        <span className="text-[11px] text-muted">共 {STYLES.length} 种风格</span>
       </div>
       <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
         {STYLES.map((style) => {
