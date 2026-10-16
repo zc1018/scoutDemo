@@ -1,5 +1,14 @@
 {
   "proposed": [],
-  "built": [],
+  "built": [
+    {
+      "id": "2103835904670658995",
+      "title": "SeeCut + HyperFrames — AI talking-head to animated-caption short video",
+      "url": "https://x.com/leaf_sanren/status/2103835904670658995",
+      "date": "2026-10-16",
+      "slug": "seecut-hyperframes",
+      "repo": "https://github.com/heygen-com/hyperframes"
+    }
+  ],
   "skipped": []
 }
