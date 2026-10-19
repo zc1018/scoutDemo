@@ -1,0 +1,26 @@
+*{box-sizing:border-box}body{margin:0;font-family:-apple-system,"PingFang SC","Noto Sans SC",sans-serif;background:#f5f3ef;color:#222}
+a{color:#b4532a}.app{max-width:1400px;margin:0 auto;padding:16px}
+header{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:12px}
+h1{margin:0;font-size:24px}.sub{margin:4px 0 0;color:#666;font-size:13px}
+.keybox{display:flex;gap:8px;align-items:center}.keybox input{width:300px}
+.badge{font-size:12px;padding:3px 8px;border-radius:99px}.badge.off{background:#ffe7c2;color:#8a5200}.badge.on{background:#cdeccf;color:#1d6b22}
+main{display:grid;grid-template-columns:360px 1fr;gap:16px}
+.board{max-height:calc(100vh - 110px);overflow:auto;padding-right:4px}
+.board h3{font-size:13px;color:#888;margin:10px 0 6px}
+.card{display:flex;gap:10px;width:100%;text-align:left;background:#fff;border:1px solid #e4dfd6;border-radius:10px;padding:8px;margin-bottom:6px;cursor:pointer}
+.card img{width:56px;height:56px;border-radius:6px}.card b{display:block;font-size:14px}.card small{color:#777;font-size:12px}
+.card.sel{border-color:#b4532a;box-shadow:0 0 0 2px #b4532a33}
+.editor{background:#fff;border-radius:12px;padding:16px;border:1px solid #e4dfd6}
+.editor h2{margin:0}.hint{color:#666;margin:4px 0 12px}.muted{color:#999;font-size:13px}
+.row{display:flex;gap:10px;flex-wrap:wrap;margin:8px 0;align-items:end}
+label{display:flex;flex-direction:column;font-size:12px;color:#555;gap:4px}
+input,select,textarea,button{font:inherit;padding:7px 10px;border:1px solid #d8d2c8;border-radius:8px;background:#fff}
+textarea{width:100%;font-size:13px;line-height:1.6;background:#faf8f4}
+button{cursor:pointer}.primary{background:#b4532a;color:#fff;border-color:#b4532a}
+.upload{margin:8px 0}.err{color:#c0392b}
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+figure{margin:0;position:relative;background:#faf8f4;border-radius:10px;padding:8px}
+figcaption{font-size:12px;color:#666;margin-bottom:6px}figure img{width:100%;max-height:420px;object-fit:contain;border-radius:6px}
+.empty{height:300px;display:grid;place-items:center;color:#aaa}
+.tag{position:absolute;right:14px;top:34px;background:#000a;color:#fff;font-size:11px;padding:2px 6px;border-radius:4px}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#222;color:#fff;padding:8px 16px;border-radius:8px}
