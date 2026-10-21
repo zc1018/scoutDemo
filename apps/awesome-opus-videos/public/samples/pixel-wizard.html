@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>像素法师样片</title>
+<style>
+  html,body{margin:0;height:100%;background:#0b1020;overflow:hidden;display:grid;place-items:center;font-family:ui-sans-serif,system-ui,sans-serif}
+  canvas{image-rendering:pixelated; image-rendering:crisp-edges; background:#0b1020; box-shadow:0 0 0 2px #1a2035}
+  .tag{position:fixed;left:12px;bottom:12px;color:#c3dafe;font-size:11px;letter-spacing:.08em;opacity:.8}
+</style></head><body>
+<canvas id="c" width="128" height="96"></canvas>
+<div class="tag">本地样片 · 像素法师 · 点画布可施法</div>
+<script>
+const canvas=document.getElementById('c');
+const ctx=canvas.getContext('2d');
+ctx.imageSmoothingEnabled=false;
+const W=128,H=96;
+const PAL={sky:'#0b1020',moon:'#e2e8f0',robe:'#4c51bf',robe2:'#2c328a',skin:'#fbd38d',hat:'#2d3748',gem:'#9f7aea',spark:'#faf089',floor:'#1a202c',outline:'#0a0a12'};
+let state='IDLE', stateT=0;
+let particles=[];
+function setState(s){state=s; stateT=0;}
+canvas.addEventListener('pointerdown',()=>{ if(state==='IDLE') setState('CHARGE'); });
+function rect(x,y,w,h,c){ctx.fillStyle=c;ctx.fillRect(x|0,y|0,w,h);}
+function drawWizard(pose){
+  const ox=52, oy=40 + Math.sin(pose.bob)*1;
+  // hat
+  rect(ox+4,oy-10,10,3,PAL.hat); rect(ox+6,oy-16,6,6,PAL.hat); rect(ox+11,oy-18,3,3,PAL.hat);
+  // head
+  rect(ox+5,oy-7,8,7,PAL.skin);
+  // beard
+  rect(ox+5,oy,8,6,PAL.moon); rect(ox+6,oy+6,6,3,PAL.moon);
+  // robe
+  rect(ox+2,oy+2,14,18,PAL.robe); rect(ox+3,oy+4,12,14,PAL.robe2);
+  // outline dots
+  rect(ox+1,oy+2,1,18,PAL.outline); rect(ox+16,oy+2,1,18,PAL.outline);
+  // staff
+  const sa=pose.staff;
+  const sx=ox+16 + Math.cos(sa)*10;
+  const sy=oy+4 + Math.sin(sa)*10;
+  rect(ox+15,oy+2,2,16, '#a0aec0');
+  rect(sx|0,sy|0,3,3, pose.gem?PAL.gem:PAL.spark);
+  return {gx:sx+1, gy:sy+1};
+}
+function frame(now){
+  stateT++;
+  // scale canvas CSS
+  const scale=Math.max(1, Math.floor(Math.min(innerWidth/W, innerHeight/H)));
+  canvas.style.width=(W*scale)+'px'; canvas.style.height=(H*scale)+'px';
+
+  rect(0,0,W,H,PAL.sky);
+  // stars
+  for(let i=0;i<30;i++){ if(((now/200)|0+i)%7!==0) rect((i*37)%W,(i*19)%40,1,1,'#ffffff'); }
+  rect(100,10,8,8,PAL.moon); rect(0,84,W,12,PAL.floor);
+
+  let pose={bob:now/250, staff:0.3, gem:false};
+  if(state==='IDLE'){ if(stateT>180) setState('CHARGE'); }
+  else if(state==='CHARGE'){
+    pose.staff=-0.8; pose.gem=true; pose.bob=now/120;
+    if(stateT%3===0) particles.push({x:70,y:42,vx:(Math.random()-0.5)*2,vy:(Math.random()-0.5)*2,life:20,c:PAL.spark});
+    if(stateT>50) setState('CAST');
+  } else if(state==='CAST'){
+    pose.staff=1.1; pose.gem=true;
+    if(stateT===1){ for(let i=0;i<24;i++){ const a=Math.random()*Math.PI*2; particles.push({x:78,y:38,vx:Math.cos(a)*3,vy:Math.sin(a)*3,life:30,c:i%2?PAL.gem:PAL.spark}); } }
+    if(stateT>35) setState('RECOVER');
+  } else if(state==='RECOVER'){
+    pose.staff=0.2;
+    if(stateT>40) setState('IDLE');
+  }
+  const gem=drawWizard(pose);
+  particles=particles.filter(p=>p.life>0);
+  for(const p of particles){ p.x+=p.vx; p.y+=p.vy; p.life--; rect(p.x|0,p.y|0,1,1,p.c); }
+  // projectile during cast
+  if(state==='CAST'){ rect(78+stateT*1.5, 38, 3, 2, PAL.spark); }
+  requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);
+</script></body></html>

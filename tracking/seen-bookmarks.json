@@ -1,5 +1,37 @@
 {
   "proposed": [],
-  "built": [],
+  "built": [
+    {
+      "id": "2103823847632060854",
+      "title": "Lemo-Opuscar — Claude Code skill / 43 code-native film styles (no video model)",
+      "url": "https://x.com/lemomo_ai/status/2103823847632060854",
+      "date": "2026-10-14",
+      "slug": "lemo-opuscar",
+      "repo": "https://github.com/lemomo-ai/lemo-opuscar"
+    },
+    {
+      "id": "2103835904670658995",
+      "title": "SeeCut + HyperFrames — AI talking-head to animated-caption short video",
+      "url": "https://x.com/leaf_sanren/status/2103835904670658995",
+      "date": "2026-10-16",
+      "slug": "seecut-hyperframes",
+      "repo": "https://github.com/heygen-com/hyperframes"
+    },
+    {
+      "id": "2104401048324743646",
+      "title": "GPT-Image 2.5 recipe board (卡兹克 12 种玩法)",
+      "url": "https://x.com/Khazix0918/status/2104401048324743646",
+      "date": "2026-10-19",
+      "slug": "gpt-image-recipes"
+    },
+    {
+      "id": "2112085934267346976",
+      "title": "awesome-opus5-5-videos — Opus 5.5 code-film prompt collection",
+      "url": "https://x.com/czzzzzzJ_/status/2112085934267346976",
+      "date": "2026-10-21",
+      "slug": "awesome-opus-videos",
+      "repo": "https://github.com/yihui-dev/awesome-opus5-5-videos"
+    }
+  ],
   "skipped": []
 }
