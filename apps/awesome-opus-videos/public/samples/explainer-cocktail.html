@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>配方解说样片</title>
+<style>
+  html,body{margin:0;height:100%;background:#101018;color:#f4f4f5;font-family:ui-sans-serif,system-ui,sans-serif;overflow:hidden}
+  canvas{display:block;width:100%;height:100%}
+  .tag{position:fixed;left:12px;bottom:12px;color:#fbd38d;font-size:11px;letter-spacing:.08em;opacity:.75}
+</style></head><body>
+<canvas id="c"></canvas>
+<div class="tag">本地样片 · 鸡尾酒配方解说 · Canvas</div>
+<script>
+const canvas=document.getElementById('c');
+const ctx=canvas.getContext('2d');
+const DPR=Math.min(devicePixelRatio||1,2);
+const steps=[
+  {label:'空杯', color:'#2d3748', fill:0},
+  {label:'冰块 60g', color:'#bee3f8', fill:0.25},
+  {label:'金酒 45ml', color:'#faf089', fill:0.55},
+  {label:'柠檬汁 20ml', color:'#9ae6b4', fill:0.72},
+  {label:'糖浆 10ml', color:'#fbb6ce', fill:0.85},
+  {label:'完成 · 干杯', color:'#f6ad55', fill:1},
+];
+function resize(){canvas.width=innerWidth*DPR;canvas.height=innerHeight*DPR;ctx.setTransform(DPR,0,0,DPR,0,0);}
+addEventListener('resize',resize);resize();
+let t0=performance.now();
+function roundRect(x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath();}
+function frame(now){
+  const t=(now-t0)/1000;
+  const w=innerWidth,h=innerHeight;
+  ctx.fillStyle='#101018'; ctx.fillRect(0,0,w,h);
+  const idx=Math.min(steps.length-1, Math.floor(t/1.6)%steps.length);
+  const step=steps[idx];
+  const local=(t/1.6)%1;
+  const fill=steps[Math.max(0,idx-1)].fill + (step.fill-steps[Math.max(0,idx-1)].fill)*Math.min(1,local*1.4);
+
+  ctx.fillStyle='#e2e8f0'; ctx.font=`600 ${Math.min(28,w*0.05)}px ui-sans-serif`;
+  ctx.fillText('配方解说 · Negroni 风格', 24, 40);
+  ctx.fillStyle='#a0aec0'; ctx.font=`400 ${Math.min(16,w*0.03)}px ui-sans-serif`;
+  ctx.fillText(`步骤 ${idx+1}/${steps.length}  ·  ${step.label}`, 24, 68);
+
+  const gw=Math.min(160,w*0.28), gh=Math.min(220,h*0.45);
+  const gx=w*0.55, gy=h*0.28;
+  // glass outline
+  ctx.strokeStyle='#cbd5e0'; ctx.lineWidth=3;
+  ctx.beginPath();
+  ctx.moveTo(gx,gy); ctx.lineTo(gx-gw*0.15,gy+gh); ctx.lineTo(gx+gw,gy+gh); ctx.lineTo(gx+gw*0.85,gy); ctx.closePath(); ctx.stroke();
+  // liquid
+  const liquidH=gh*fill;
+  ctx.save();
+  ctx.beginPath();
+  ctx.moveTo(gx,gy); ctx.lineTo(gx-gw*0.15,gy+gh); ctx.lineTo(gx+gw,gy+gh); ctx.lineTo(gx+gw*0.85,gy); ctx.closePath();
+  ctx.clip();
+  ctx.fillStyle=step.color;
+  ctx.globalAlpha=0.85;
+  ctx.fillRect(gx-40, gy+gh-liquidH, gw+80, liquidH+10);
+  ctx.restore();
+
+  // measure cards
+  const cards=steps.slice(1,5);
+  cards.forEach((c,i)=>{
+    const active=i+1<=idx;
+    const x=24, y=100+i*54;
+    roundRect(x,y,Math.min(260,w*0.4),44,10);
+    ctx.fillStyle=active? '#1a202c':'#15151f';
+    ctx.fill();
+    ctx.strokeStyle=active? c.color:'#2d3748';
+    ctx.lineWidth=2; ctx.stroke();
+    ctx.fillStyle=active? c.color:'#718096';
+    ctx.font='600 14px ui-sans-serif';
+    ctx.fillText((active?'✓ ':'○ ')+c.label, x+14, y+28);
+  });
+
+  requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);
+</script></body></html>
