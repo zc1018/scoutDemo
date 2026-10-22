@@ -53,7 +53,7 @@ export const CATEGORIES: { id: string; label: string }[] = [
   { id: "action", label: "动作·舞蹈·特效" },
 ];
 
-export const TEMPLATES: TemplateItem[] = 
+export const TEMPLATES: TemplateItem[] = [
   {
     kind: 'template',
     id: "3d-cartoon",
@@ -554,7 +554,7 @@ export const SKILLS: SkillItem[] = [
   },
 ];
 
-export const CASES: CaseItem[] = 
+export const CASES: CaseItem[] = [
   {
     kind: 'case',
     id: "seedance-25-diner-frozen-time-rewind",
