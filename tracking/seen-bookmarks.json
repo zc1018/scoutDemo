@@ -1,5 +1,14 @@
 {
   "proposed": [],
-  "built": [],
+  "built": [
+    {
+      "id": "2103823847632060854",
+      "title": "Lemo-Opuscar — Claude Code skill / 43 code-native film styles (no video model)",
+      "url": "https://x.com/lemomo_ai/status/2103823847632060854",
+      "date": "2026-10-14",
+      "slug": "lemo-opuscar",
+      "repo": "https://github.com/lemomo-ai/lemo-opuscar"
+    }
+  ],
   "skipped": []
 }
